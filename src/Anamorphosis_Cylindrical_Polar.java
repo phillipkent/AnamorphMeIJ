@@ -1,12 +1,12 @@
 import ij.*;
 import ij.process.*;
 import ij.plugin.*;
-//import java.lang.*;
+import java.lang.*;
 import java.awt.*;
-//import java.awt.image.*;
-//import java.text.DecimalFormat;
-//import ij.measure.*;
-//import ij.plugin.filter.*;
+import java.awt.image.*;
+import java.text.DecimalFormat;
+import ij.measure.*;
+import ij.plugin.filter.*;
 import ij.gui.*;
 
 /* ImageJ plugin for the AnamorphMeIJ project:
@@ -38,6 +38,9 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
  static boolean defaultLines = true;
  static boolean defaultCenter = true;
  static boolean clockWise = false; // true
+ 
+ int mirrorRadius = 100;
+ int angularSize = 220;
 
  boolean isColor = false;
  String title;
@@ -64,21 +67,14 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
    heightInitial = ipInitial.getHeight();
    if (ipInitial instanceof  ColorProcessor) isColor = true;
 
-   if (toPolar)
-   {
-     title = "Polar Transform of "+iInitial.getTitle();
-     if(polar180) angleLines = 180;
-     else angleLines = 360;
-     if(!defaultLines) getLines();
-     if (polar180) polar180();
-     else polar360();
-   }
-   else
-   {
-     title = "Cartesian Transform of "+iInitial.getTitle();
-     if (polar180) cart180();
-     else cart360();
-   }
+   
+   title = "Cylindrical mirror (polar) anamorphosis of "+iInitial.getTitle();
+   // call transform method........  
+   ////
+   angleLines = 360;
+   if(!defaultLines) getLines();
+   polar360();
+   ////
 
    // Copy settings from the original to the transformed image:
    ipTransform.setMinAndMax(ipInitial.getMin (), ipInitial.getMax ());
@@ -90,79 +86,15 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
 
  }
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -- polar180()
- public void polar180()
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ public void polarTransform()
  {
-
-  // Establish the default center of Cartesian space
-  getPolarCenter ();
-
-  // Set up the Polar Grid:
-  // Use y values for angles
-  // -- 180 degrees (0 to 179...)
-  heightTransform = angleLines;
-
-  // Line width will be:
-  //  --  equal to 2*radius+1 -- Need to find the greatest radius
-  //  --  (4 possibilities: from center to each corner)
-  //  --  Top-Left Corner (0,0):
-  double radius = Math.sqrt((centerX-0)*(centerX-0) + (centerY-0)*(centerY-0));
-  //  --  Top-Right Corner (widthInitial, 0):
-  double radiusTemp = Math.sqrt((centerX-widthInitial)*(centerX-widthInitial) + (centerY-0)*(centerY-0));
-  if (radiusTemp>radius) radius = radiusTemp;
-  //  --  Bottom-Left Corner (0, heightInitial):
-  radiusTemp = Math.sqrt((centerX-0)*(centerX-0) + (centerY-heightInitial)*(centerY-heightInitial));
-  if (radiusTemp>radius) radius = radiusTemp;
-  //  -- Bottom-Right Corner (widthInitial , heightInitial):
-  radiusTemp = Math.sqrt((centerX-widthInitial)*(centerX-widthInitial) + (centerY-heightInitial)*(centerY-heightInitial));
-  if (radiusTemp>radius) radius = radiusTemp;
-  int radiusInt = (int)radius;
-  widthTransform = radiusInt*2+1;
-
-
-  // -- Create the new image
-  if (isColor) ipTransform = new ColorProcessor(widthTransform, heightTransform);
-  else ipTransform = new ShortProcessor(widthTransform, heightTransform);
-
-  // Fill the Polar Grid
-  IJ.showStatus("Calculating...");
-  for (int yy = 0; yy < heightTransform; yy++)
-  {
-   for (int xx = 0; xx < widthTransform; xx++)
-   {
-
-    // -- For each polar pixel, need to convert it to Cartesian coordinates
-    double r = xx - radiusInt;
-    double angle = (yy/(double)angleLines)*Math.PI;
-
-    // -- Need convert (x,y) into pixel coordinates
-    double x = getCartesianX (r, angle) + centerX;
-    double y = getCartesianY (r, angle) + centerY;
-
-    if (isColor)
-    {
-     interpolateColorPixel(x, y);
-     ipTransform.putPixel(xx,yy,rgbArray);
-    }
-    else
-    {
-     double newValue = ipInitial.getInterpolatedPixel(x,y);
-     ipTransform.putPixelValue(xx,yy,newValue);
-    }
-
-    // -- End out the loops
-   }
-   IJ.showProgress(yy, heightTransform);
-  }
-  IJ.showProgress(1.0);
+	 
  }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -- polar360()
  public void polar360()
  {
-
   // Establish the default center of Cartesian space
   getPolarCenter ();
 
@@ -226,128 +158,19 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
  }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -- cart180()
- public void cart180()
- {
-
-  // Set up the Cartesian Grid:
-  // -- Will have radius x radius pixels
-  heightTransform = widthInitial;
-  widthTransform = widthInitial;
-
-  // Establish the default center of Cartesian space
-  getCartesianCenter ();
-
-  // -- Create the new image
-  if (isColor) ipTransform = new ColorProcessor(widthTransform, heightTransform);
-  else ipTransform = new ShortProcessor(widthTransform, heightTransform);
-
-  // Fill the Cartesian Grid
-  IJ.showStatus("Calculating...");
-  for (int yy = 0; yy < heightTransform; yy++)
-  {
-   for (int xx = 0; xx < widthTransform; xx++)
-   {
-
-    // -- For each Cartesian pixel, need to convert it to Polar coordinates
-    double x = xx - centerX;
-    double y = yy - centerY;
-    double r = getRadius (x, y);
-    double angle = getAngle(x,y);
-
-    // -- Need convert (x,y) into pixel coordinates
-    if (angle >= 180) {
-     angle = angle - 180;
-     x = -r;
-    } else {
-     x = r;
-    }
-
-    x = x + widthInitial/2;
-    y = angle*(heightInitial/180.0);
-
-    if (isColor)
-    {
-     interpolateColorPixel(x, y);
-     ipTransform.putPixel(xx,yy,rgbArray);
-    }
-    else
-    {
-     double newValue = ipInitial.getInterpolatedPixel(x,y);
-     ipTransform.putPixelValue(xx,yy,newValue);
-    }
-
-    // -- End out the loops
-   }
-   IJ.showProgress(yy, heightTransform);
-  }
-  IJ.showProgress(1.0);
- }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -- cart360()
- public void cart360()
- {
-
-  // Set up the Cartesian Grid:
-  // -- Will have radius x radius pixels
-  heightTransform = widthInitial*2+1;
-  widthTransform = widthInitial*2+1;
-
-  // Establish the default center of Cartesian space
-  getCartesianCenter ();
-
-  // -- Create the new image
-  if (isColor) ipTransform = new ColorProcessor(widthTransform, heightTransform);
-  else ipTransform = new ShortProcessor(widthTransform, heightTransform);
-
-  // Fill the Cartesian Grid
-  IJ.showStatus("Calculating...");
-  for (int yy = 0; yy < heightTransform; yy++)
-  {
-   for (int xx = 0; xx < widthTransform; xx++)
-   {
-
-    // -- For each Cartesian pixel, need to convert it to Polar coordinates
-    double x = xx - centerX;
-    double y = yy - centerY;
-    double r = getRadius (x, y);
-    double angle = getAngle(x,y);
-
-    // -- Need convert (x,y) into pixel coordinates
-    x = r;
-    y = angle*(heightInitial/360.0);
-
-    if (isColor)
-    {
-     interpolateColorPixel(x, y);
-     ipTransform.putPixel(xx,yy,rgbArray);
-    }
-    else
-    {
-     double newValue = ipInitial.getInterpolatedPixel(x,y);
-     ipTransform.putPixelValue(xx,yy,newValue);
-    }
-
-    // -- End out the loops
-   }
-   IJ.showProgress(yy, heightTransform);
-  }
-  IJ.showProgress(1.0);
- }
-
 
  boolean showDialog(ImageProcessor ip)
  {
-  GenericDialog gd = new GenericDialog("Polar Transformer");
-  gd.addChoice("Method:", op1, op1[toPolar ? 0 : 1]);
-  gd.addChoice("Degrees used for Polar Space:", op2, op2[polar180 ? 0 : 1]);
+  GenericDialog gd = new GenericDialog("Anamorphosis Cylindrical Polar");
+  //gd.addChoice("Method:", op1, op1[toPolar ? 0 : 1]);
+  //gd.addChoice("Degrees used for Polar Space:", op2, op2[polar180 ? 0 : 1]);
   gd.addCheckbox("Default Center for Cartesian Space", defaultCenter);
   gd.addCheckbox("For Polar Transforms, Use 1 Line Per Angle", defaultLines);
   gd.addCheckbox("Clock-wise rotation", clockWise);
   gd.showDialog();
   if (gd.wasCanceled()) return false;
-  toPolar = (gd.getNextChoiceIndex() == 0);
-  polar180 = (gd.getNextChoiceIndex() == 0);
+  //toPolar = (gd.getNextChoiceIndex() == 0);
+  //polar180 = (gd.getNextChoiceIndex() == 0);
   defaultCenter = gd.getNextBoolean();
   defaultLines = gd.getNextBoolean();
   clockWise = gd.getNextBoolean();
