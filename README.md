@@ -9,7 +9,7 @@ Project website: www.anamorphosis.com
 Github site: github.com/phillipkent/AnamorphMeIJ
 
 Date last modified: 
-2013-11-03
+2013-11-23
 
 Summary: 
 Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
@@ -25,7 +25,7 @@ Detailed status:
 
 <table>
 <tr><td><strong>Class</strong></td><td><strong>Transformation</strong></td><td><strong>Status</strong></td></tr>
-<tr><td>anamorphosis_linear_stretch</td><td>linear stretch</td><td>not started</td></tr>
+<tr><td>anamorphosis_linear_stretch</td><td>linear stretch</td><td>working in trial version</td></tr>
 <tr><td>anamorphosis_oblique</td><td>	oblique anamorphosis</td><td>	not started</td></tr>
 <tr><td>anamorphosis_cylindrical_polarcoords</td><td>	cylindrical mirror – polar coordinate approximation</td><td>	in progress</td></tr>
 <tr><td>anamorphosis_conical_mirror</td><td>conical mirror</td><td>	not started</td></tr>

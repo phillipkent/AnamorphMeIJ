@@ -20,7 +20,7 @@ import ij.gui.*;
 */
 
 
-// -- by Phillip Kent
+// -- Author: Phillip Kent
 // -- phillip.kent@gmail.com
 // -- http://www.anamorphosis.com
 
@@ -33,12 +33,14 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
  ImagePlus iTransform, iInitial;
 
  // Persistent options with default values:
+ /////TO BE DELETED/MODIFED
  static boolean toPolar = true;
  static boolean polar180 = false; // true;
  static boolean defaultLines = true;
  static boolean defaultCenter = true;
  static boolean clockWise = false; // true
  
+ /////ADDED
  int mirrorRadius = 100;
  int angularSize = 220;
 
