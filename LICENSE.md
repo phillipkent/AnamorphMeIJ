@@ -1,5 +1,9 @@
-## AnamorphMeIJ: Anamorphosis image transformation code implemented as a
+## AnamorphMeIJ
+
+### Anamorphosis image transformation code implemented as a
 set of plugins for ImageJ
+
+### These programs are licensed under the GNU GPL as follows...
 
 Copyright (C) 2013 Phillip Kent
 
