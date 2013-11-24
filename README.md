@@ -12,7 +12,7 @@ Date last modified:
 2013-11-23
 
 Summary: 
-Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
+Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/
 
 Status:
 UNDER DEVELOPMENT - Nothing to look at yet but keep watching for progress
