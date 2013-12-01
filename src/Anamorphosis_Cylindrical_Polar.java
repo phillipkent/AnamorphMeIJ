@@ -16,8 +16,7 @@ import ij.gui.*;
 /*
    AnamorphMeIJ is anamorphosis image transformation code implemented as plugins for ImageJ
    It is based on an original application "Anamorph Me!" created in C++ in year 2001
-   <http://www,anamorphosis.com>
-
+   <http://www.anamorphosis.com>
 */
 
 /*
@@ -55,10 +54,10 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
  // Persistent options with default values:
  /////TO BE DELETED/MODIFED
  static boolean toPolar = true;
- static boolean polar180 = false; // true;
+ static boolean polar180 = false;
  static boolean defaultLines = true;
  static boolean defaultCenter = true;
- static boolean clockWise = false; // true
+ static boolean clockWise = false;
  
  /////ADDED
  int mirrorRadius = 100;
@@ -66,9 +65,9 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
 
  boolean isColor = false;
  String title;
- static String[] op1 = {"Polar", "Cartesian"};
- static String[] op2 = {"180", "360"};
+ //DELETE THESE...
  int angleLines = 180;
+ /////
  int [] rgbArray = new int[3];
  int [] xLyL = new int[3];
  int [] xLyH = new int[3];
@@ -89,13 +88,13 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
    heightInitial = ipInitial.getHeight();
    if (ipInitial instanceof  ColorProcessor) isColor = true;
 
-   
    title = "Cylindrical mirror (polar) anamorphosis of "+iInitial.getTitle();
    // call transform method........  
+   polarTransform();
    ////
-   angleLines = 360;
-   if(!defaultLines) getLines();
-   polar360();
+   //angleLines = 360;
+   //if(!defaultLines) getLines();
+   //polar360();
    ////
 
    // Copy settings from the original to the transformed image:
@@ -184,18 +183,12 @@ public class Anamorphosis_Cylindrical_Polar implements PlugIn
  boolean showDialog(ImageProcessor ip)
  {
   GenericDialog gd = new GenericDialog("Anamorphosis Cylindrical Polar");
-  //gd.addChoice("Method:", op1, op1[toPolar ? 0 : 1]);
-  //gd.addChoice("Degrees used for Polar Space:", op2, op2[polar180 ? 0 : 1]);
-  gd.addCheckbox("Default Center for Cartesian Space", defaultCenter);
-  gd.addCheckbox("For Polar Transforms, Use 1 Line Per Angle", defaultLines);
-  gd.addCheckbox("Clock-wise rotation", clockWise);
+  gd.addNumericField("Mirror radius: ", mirrorRadius, 0, 4, "pixels");
+  gd.addNumericField("Angular size: ", angularSize, 0, 3, "degrees");
   gd.showDialog();
   if (gd.wasCanceled()) return false;
-  //toPolar = (gd.getNextChoiceIndex() == 0);
-  //polar180 = (gd.getNextChoiceIndex() == 0);
-  defaultCenter = gd.getNextBoolean();
-  defaultLines = gd.getNextBoolean();
-  clockWise = gd.getNextBoolean();
+  mirrorRadius =  (int) gd.getNextNumber();
+  angularSize = (int) gd.getNextNumber();
   return true;
  }
 

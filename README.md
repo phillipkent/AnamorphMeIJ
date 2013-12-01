@@ -12,13 +12,13 @@ Date last modified:
 2013-11-23
 
 Summary: 
-Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/
+Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
 
 Status:
-UNDER DEVELOPMENT - Nothing to look at yet but keep watching for progress
+UNDER DEVELOPMENT - see below for transformations that are working
 
 How to install: 
-(1) Install ImageJ to your computer; (2) copy the AnamorphMe folder from plugins/ to your own ImageJ/plugins/ folder.
+(1) Install ImageJ to your computer; (2) copy the AnamorphMe folder from the plugins folder to your own ImageJ/plugins/ folder.
 
 
 Detailed status:

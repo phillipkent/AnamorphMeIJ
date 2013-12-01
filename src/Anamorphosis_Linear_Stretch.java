@@ -9,8 +9,8 @@ import ij.measure.*;
 import ij.plugin.filter.*;
 import ij.gui.*;
 
-/* ImageJ plugin for the AnamorphMeIJ project:
- * Anamorphosis Cylindrical Polar
+/* ImageJ plugin for the AnamorphMeIJ project: 
+ * Anamorphosis Linear Stretch
  */
 
 /*
