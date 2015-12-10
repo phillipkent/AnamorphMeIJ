@@ -6,16 +6,16 @@ Author: Phillip Kent www.phillipkent.net
 
 Project website: www.anamorphosis.com
 
-Github site: github.com/phillipkent/AnamorphMeIJ
+Github site: https://github.com/phillipkent/AnamorphMeIJ
 
 Date last modified: 
-2013-11-23
+2015-12-10
 
 Summary: 
 Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
 
 Status:
-UNDER DEVELOPMENT - see below for transformations that are working
+UNDER DEVELOPMENT - see below for progress table
 
 How to install: 
 (1) Install ImageJ to your computer; (2) copy the AnamorphMe folder from the plugins folder to your own ImageJ/plugins/ folder.
