@@ -9,7 +9,7 @@ import ij.measure.*;
 import ij.plugin.filter.*;
 import ij.gui.*;
 
-/* ImageJ plugin for the AnamorphMeIJ project:
+/* ImageJ plugin for the AnamorphMeIJ project: 
  * Anamorphosis Cylindrical Polar
  */
 
@@ -20,9 +20,9 @@ import ij.gui.*;
 */
 
 /*
-   Copyright (C) 2013 Phillip Kent
+   Copyright (C) 2015 Phillip Kent
    
-   Author contact: phillip.kent@gmail.com, <http://www.phillipkent.net>
+   Author contact: phillip.kent@xmlsoup.com, <http://www.phillipkent.net>
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by

@@ -26,8 +26,9 @@ Detailed status:
 <table>
 <tr><td><strong>Class</strong></td><td><strong>Transformation</strong></td><td><strong>Status</strong></td></tr>
 <tr><td>anamorphosis_linear_stretch</td><td>linear stretch</td><td>working in trial version</td></tr>
+<tr><td>anamorphosis_affine</td><td>affine transformation</td><td>in progress</td></tr>
 <tr><td>anamorphosis_oblique</td><td>	oblique anamorphosis</td><td>	not started</td></tr>
-<tr><td>anamorphosis_cylindrical_polarcoords</td><td>	cylindrical mirror – polar coordinate approximation</td><td>	in progress</td></tr>
+<tr><td>anamorphosis_cylindrical_polarcoords</td><td>	cylindrical mirror – polar coordinate approximation</td><td>in progress</td></tr>
 <tr><td>anamorphosis_conical_mirror</td><td>conical mirror</td><td>	not started</td></tr>
 <tr><td>anamorphosis_cone_projection</td><td>conical projection</td><td>	not started</td></tr>
 <tr><td>anamorphosis_pyramid_projection</td><td>pyramid projection</td><td>	not started</td></tr>

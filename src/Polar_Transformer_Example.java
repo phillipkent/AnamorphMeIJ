@@ -10,7 +10,7 @@ import java.awt.*;
 import ij.gui.*;
 
 /*  This is a plugin example for adaptation. 
- *  !! It will not be part of the AnamorphMeIJ plugins
+ *  ***** It will not be part of the AnamorphMeIJ plugins
  */
 
 
