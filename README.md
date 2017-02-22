@@ -12,7 +12,7 @@ Date last modified:
 2015-12-10
 
 Summary: 
-Anamorphosis image transformation code "AnamorphMeIJ" implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
+Anamorphosis image transformation codes implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]
 
 Status:
 UNDER DEVELOPMENT - see below for progress table
@@ -33,6 +33,5 @@ Detailed status:
 <tr><td>anamorphosis_cone_projection</td><td>conical projection</td><td>	not started</td></tr>
 <tr><td>anamorphosis_pyramid_projection</td><td>pyramid projection</td><td>	not started</td></tr>
 <tr><td>-</td><td>   cylindrical exact </td><td>  not started</td></tr>
-<tr><td>- </td><td> affine transformation</td><td>  not started</td></tr>
 <tr><td>- </td><td> polygonal pyramid projection (generalisation of pyramid)</td><td> not started</td></tr>
 </table>
