@@ -9,7 +9,7 @@ Project website: www.anamorphosis.com
 Github site: https://github.com/phillipkent/AnamorphMeIJ
 
 Date last modified: 
-2015-12-10
+2017-12-14
 
 Summary: 
 Anamorphosis image transformation codes implemented as a set of plugins for ImageJ [http://imagej.nih.gov/ij/]

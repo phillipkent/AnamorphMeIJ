@@ -17,12 +17,15 @@ import ij.gui.*;
    AnamorphMeIJ is anamorphosis image transformation code implemented as 
    plugins for ImageJ. It is based on an original application "Anamorph Me!" 
    created in C++ in year 2001
+   Software web sites: 
+      <https://www.amamorphosis.com>
+      <https://github.com/phillipkent/AnamorphMeIJ>
 */
 
 /*
  * Copyright (C) 2013 Phillip Kent
 
-   Author contact: phillip.kent@gmail.com, <http://www.phillipkent.net>
+   Author contact: phillip.kent@xmlsoup.com, <https://www.phillipkent.net>
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
